@@ -1,12 +1,8 @@
-export const validate = data => {
+export const validate = (data , type) => {
     const errors = {};
     const regexEmailValid =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-    if(!data.name.trim()){
-        errors.name = "Username is required"
-    } else {
-        delete errors.name
-    }
+
 
     if(!data.email){
         errors.email = 'Email is required'
@@ -24,18 +20,28 @@ export const validate = data => {
         delete errors.password
     }
 
-    if(!data.confirmPassword){
-        errors.confirmPassword = 'Confirm the password please'
-    }else if(data.confirmPassword !== data.password){
-        errors.confirmPassword = "pass doesn't match"
-    }else{
-        delete errors.confirmPassword
-    }
 
-    if(data.isAccepted){
-        delete errors.isAccepted
-    }else{
-        errors.isAccepted = 'please accept our regulation'
+    if(type === "signup"){
+        if(!data.name.trim()){
+            errors.name = "Username is required"
+        } else {
+            delete errors.name
+        }
+
+        if(!data.confirmPassword){
+            errors.confirmPassword = 'Confirm the password please'
+        }else if(data.confirmPassword !== data.password){
+            errors.confirmPassword = "pass doesn't match"
+        }else{
+            delete errors.confirmPassword
+        }
+    
+        if(data.isAccepted){
+            delete errors.isAccepted
+        }else{
+            errors.isAccepted = 'please accept our regulation'
+        }
+    
     }
 
     return errors;
