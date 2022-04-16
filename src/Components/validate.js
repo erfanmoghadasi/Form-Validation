@@ -37,4 +37,6 @@ export const validate = data => {
     }else{
         errors.isAccepted = 'please accept our regulation'
     }
+
+    return errors;
 }
